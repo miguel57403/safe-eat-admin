@@ -3,10 +3,6 @@ import requests
 import json
 import random
 
-# BASE_URL = "https://safe-eat-api.azurewebsites.net"
-BASE_URL = "http://localhost:8080"
-SAVE_IMAGES = False
-
 
 def load_json(path):
     with open(path, 'r', encoding="utf-8") as f:
@@ -90,18 +86,19 @@ class Context:
 class Call:
     count = 1
 
-    def __init__(self, *, debug=True) -> None:
+    def __init__(self, *, base_url, debug=True) -> None:
         self.headers = {}
+        self.base_url = base_url
         self.debug = debug
 
     def _log_start(self, method, url, *, force=False):
         if self.debug and force:
-            url = url.replace(BASE_URL, "")
+            url = url.replace(self.base_url, "")
             print(f'[{Call.count}] {method} {url} Started')
 
     def _log_end(self, method, url, response):
         if self.debug:
-            url = url.replace(BASE_URL, "")
+            url = url.replace(self.base_url, "")
             print(f'[{Call.count}] {method} {url} End: ', response.json())
 
     def add_header(self, key, value):
@@ -131,9 +128,9 @@ class Call:
 
 
 class MockerAdmin:
-    def __init__(self, ctx: Context) -> None:
+    def __init__(self, ctx: Context, base_url: str, save_images: bool) -> None:
         self.ctx = ctx
-        self.call = Call()
+        self.call = Call(base_url=base_url)
         self.admin = {
             "password": "123",
             "name": "Admin",
@@ -142,6 +139,8 @@ class MockerAdmin:
             "restrictionIds": [],
         }
         self.executions = []
+        self.base_url = base_url
+        self.save_images = save_images
 
     def _check_dependencies(self, current, dependencies):
         if all(it in self.executions for it in dependencies):
@@ -151,10 +150,10 @@ class MockerAdmin:
             f"MockerAdmin: '{current}' depends on {dependencies}, but {self.executions} were executed")
 
     def _signup(self):
-        self.call.post(f"{BASE_URL}/signup", json=self.admin).json()
+        self.call.post(f"{self.base_url}/signup", json=self.admin).json()
 
     def _login(self):
-        token = self.call.post(f"{BASE_URL}/login", json={
+        token = self.call.post(f"{self.base_url}/login", json={
             "email": self.admin['email'],
             "password": self.admin['password']
         }).json()['token']
@@ -164,33 +163,33 @@ class MockerAdmin:
         self._check_dependencies("restrictions", [])
         self.call.debug = False
         for restriction in Mock.restrictions:
-            response = self.call.post(f"{BASE_URL}/restrictions",
+            response = self.call.post(f"{self.base_url}/restrictions",
                                       json=restriction, headers=self.call.headers)
-        response = self.call.get(f"{BASE_URL}/restrictions")
+        response = self.call.get(f"{self.base_url}/restrictions")
         self.ctx.add_all("restrictions", response.json())
         print("Restrictions Count: ", len(response.json()))
         print()
         self.call.debug = True
 
     def _update_category_image(self, category, extras):
-        if not SAVE_IMAGES:
+        if not self.save_images:
             return
         files = {"image": open("./images/categories/" +
                                extras.get("image"), "rb")}
-        self.call.put(f"{BASE_URL}/categories/{category['id']}/image",
+        self.call.put(f"{self.base_url}/categories/{category['id']}/image",
                       files=files, headers=self.call.headers)
 
     def _add_advertisements(self, restaurant, extras):
         restaurant_id = restaurant["id"]
         self.call.debug = False
         for advertisement in extras.get("advertisements", []):
-            self.call.post(f"{BASE_URL}/advertisements", json={
+            self.call.post(f"{self.base_url}/advertisements", json={
                 "title": advertisement,
                 "restaurantId": restaurant_id,
             }, headers=self.call.headers)
             # TODO: Add image
         response = self.call.get(
-            f"{BASE_URL}/advertisements/restaurant/{restaurant_id}", headers=self.call.headers)
+            f"{self.base_url}/advertisements/restaurant/{restaurant_id}", headers=self.call.headers)
         print("Advertisements Count: ", len(response.json()))
         self.call.debug = True
         print()
@@ -199,9 +198,9 @@ class MockerAdmin:
         restaurantId = restaurant["id"]
         self.call.debug = False
         for delivery in Mock.deliveries:
-            self.call.post(f"{BASE_URL}/deliveries/restaurant/{restaurantId}",
+            self.call.post(f"{self.base_url}/deliveries/restaurant/{restaurantId}",
                            json=delivery, headers=self.call.headers)
-        response = self.call.get(f"{BASE_URL}/deliveries/restaurant/{restaurantId}",
+        response = self.call.get(f"{self.base_url}/deliveries/restaurant/{restaurantId}",
                                  headers=self.call.headers)
         print("Deliveries Count: ", len(response.json()))
         self.call.debug = True
@@ -215,7 +214,7 @@ class MockerAdmin:
             del restaurant["$$"]
 
             self.call.debug = False
-            response = self.call.post(f"{BASE_URL}/restaurants",
+            response = self.call.post(f"{self.base_url}/restaurants",
                                       json=restaurant, headers=self.call.headers)
             try:
                 response = response.json()
@@ -227,7 +226,7 @@ class MockerAdmin:
 
         self.call.debug = False
         response = self.call.get(
-            f"{BASE_URL}/restaurants", headers=self.call.headers)
+            f"{self.base_url}/restaurants", headers=self.call.headers)
         self.ctx.add_all("restaurants", response.json())
         print("Restaurants Count: ", len(response.json()))
         print()
@@ -242,10 +241,10 @@ class MockerAdmin:
             restaurant_ids = [self.ctx.get_id('restaurants', lambda it: it['name'] == name)
                               for name in extras.get("restaurants", [])]
             section["restaurantIds"] = restaurant_ids
-            response = self.call.post(f"{BASE_URL}/restaurantSections",
+            response = self.call.post(f"{self.base_url}/restaurantSections",
                                       json=section, headers=self.call.headers)
             section = response.json()
-        response = self.call.get(f"{BASE_URL}/restaurantSections",
+        response = self.call.get(f"{self.base_url}/restaurantSections",
                                  headers=self.call.headers)
         print("Restaurant Sections Count: ", len(response.json()))
         print()
@@ -258,14 +257,14 @@ class MockerAdmin:
             self.call.debug = False
             extras = category["$$"]
             del category["$$"]
-            response = self.call.post(f"{BASE_URL}/categories",
+            response = self.call.post(f"{self.base_url}/categories",
                                       json=category, headers=self.call.headers)
             category = response.json()
             self._update_category_image(category, extras)
 
         self.call.debug = False
         response = self.call.get(
-            f"{BASE_URL}/categories", headers=self.call.headers)
+            f"{self.base_url}/categories", headers=self.call.headers)
         self.ctx.add_all("categories", response.json())
         print("Categories Count: ", len(response.json()))
         print()
@@ -307,9 +306,9 @@ class MockerAdmin:
             extras = ingredient["$$"]
             del ingredient["$$"]
             restaurantId = extras["restaurantId"]
-            self.call.post(f"{BASE_URL}/ingredients/restaurant/{restaurantId}",
+            self.call.post(f"{self.base_url}/ingredients/restaurant/{restaurantId}",
                            json=ingredient, headers=self.call.headers)
-        response = self.call.get(f"{BASE_URL}/ingredients",
+        response = self.call.get(f"{self.base_url}/ingredients",
                                  headers=self.call.headers)
         self.ctx.add_all("ingredients", response.json())
         print("Ingredients Count: ", len(response.json()))
@@ -351,9 +350,9 @@ class MockerAdmin:
             extras = product["$$"]
             del product["$$"]
             restaurantId = extras["restaurantId"]
-            self.call.post(f"{BASE_URL}/products/restaurant/{restaurantId}",
+            self.call.post(f"{self.base_url}/products/restaurant/{restaurantId}",
                            json=product, headers=self.call.headers)
-        response = self.call.get(f"{BASE_URL}/products",
+        response = self.call.get(f"{self.base_url}/products",
                                  headers=self.call.headers)
         self.ctx.add_all("products", response.json())
         print("Products Count: ", len(response.json()))
@@ -372,10 +371,10 @@ class MockerAdmin:
                         'products', {"name": product, "restaurantId": restaurantId})
                     for product in products]
                 data = {"name": section, "productIds": product_ids}
-                self.call.post(f"{BASE_URL}/productSections/restaurant/{restaurantId}",
+                self.call.post(f"{self.base_url}/productSections/restaurant/{restaurantId}",
                                json=data, headers=self.call.headers)
         response = self.call.get(
-            f"{BASE_URL}/productSections", headers=self.call.headers)
+            f"{self.base_url}/productSections", headers=self.call.headers)
         self.ctx.add_all("product_sections", response.json())
         print("Product Sections Count: ", len(response.json()))
         print()
@@ -393,19 +392,21 @@ class MockerAdmin:
 
 
 class MockerUser:
-    def __init__(self, ctx: Context) -> None:
+    def __init__(self, ctx: Context, base_url: str, save_images: bool) -> None:
         self.ctx = ctx
-        self.call = Call()
+        self.call = Call(base_url=base_url)
+        self.base_url = base_url
+        self.save_images = save_images
 
     def _signup(self, user: dict, extras: dict):
         restrictions_ids = [self.ctx.get_id("restrictions", lambda it: it['name'] == name)
                             for name in extras.get("restrictions", [])]
         user["restrictionIds"] = restrictions_ids
-        self.call.post(f"{BASE_URL}/signup", json=user)
+        self.call.post(f"{self.base_url}/signup", json=user)
         print()
 
     def _login(self, user: dict, extras: dict):
-        token = self.call.post(f"{BASE_URL}/login", json={
+        token = self.call.post(f"{self.base_url}/login", json={
             "email": user['email'],
             "password": user['password']
         }).json()['token']
@@ -413,19 +414,19 @@ class MockerUser:
         print()
 
     def _upload_image(self, user: dict, extras: dict):
-        if not SAVE_IMAGES:
+        if not self.save_images:
             return
         files = {"image": open("./images/users/" + extras.get("photo"), "rb")}
-        self.call.put(f"{BASE_URL}/users/me/image",
+        self.call.put(f"{self.base_url}/users/me/image",
                       files=files, headers=self.call.headers)
         print()
 
     def _add_addresses(self, user: dict, extras: dict):
         self.call.debug = False
         for it in extras.get("addresses", []):
-            self.call.post(f"{BASE_URL}/addresses", json=it,
+            self.call.post(f"{self.base_url}/addresses", json=it,
                            headers=self.call.headers)
-        result = self.call.get(f"{BASE_URL}/addresses/user/me",
+        result = self.call.get(f"{self.base_url}/addresses/user/me",
                                headers=self.call.headers)
         print("Addresses Count: ", len(result.json()))
         print()
@@ -435,9 +436,9 @@ class MockerUser:
         self.call.debug = False
         count = extras.get("payments", 0)
         for it in Mock.payments[0:count]:
-            self.call.post(f"{BASE_URL}/payments", json=it,
+            self.call.post(f"{self.base_url}/payments", json=it,
                            headers=self.call.headers)
-        result = self.call.get(f"{BASE_URL}/payments/user/me",
+        result = self.call.get(f"{self.base_url}/payments/user/me",
                                headers=self.call.headers)
         print("Payments Count: ", len(result.json()))
         print()
@@ -454,12 +455,13 @@ class MockerUser:
         self._add_payments(user, extras)
 
 
-ctx = Context()
-admin = MockerAdmin(ctx)
-admin.execute()
+def database_feed(base_url: str, save_images: bool):
+    ctx = Context()
+    admin = MockerAdmin(ctx, base_url, save_images)
+    admin.execute()
 
-for it in Mock.users:
-    user = MockerUser(ctx)
-    user.execute(it)
+    for it in Mock.users:
+        user = MockerUser(ctx, base_url, save_images)
+        user.execute(it)
 
-print(f"Done using {Call.count} requests")
+    print(f"Done using {Call.count} requests")
