@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Popular",
+    "restaurantIds": [],
+    "$$": {
+      "restaurants": [
+        "A Cozinha Portuguesa",
+        "Cantinho Lusitano",
+        "O Tasco",
+        "Taberna Portuguesa",
+        "Sabores do Douro"
+      ]
+    }
+  },
+  {
+    "name": "Best prices",
+    "restaurantIds": [],
+    "$$": {
+      "restaurants": [
+        "Tasca do Zé",
+        "Taverna do Bacalhau",
+        "O Fado",
+        "Adega da Vila",
+        "Casa Portuguesa"
+      ]
+    }
+  },
+  {
+    "name": "Lunch",
+    "restaurantIds": [],
+    "$$": {
+      "restaurants": ["Aromas de Portugal", "O Marisqueiro", "O Refúgio"]
+    }
+  },
+  {
+    "name": "Breakfast",
+    "restaurantIds": [],
+    "$$": {
+      "restaurants": [
+        "Sabor Português",
+        "Petiscos e Vinhos",
+        "Tasca da Esquina",
+        "Maré de Sabores",
+        "Sabores de Portugal",
+        "Tradições Lusas",
+        "Marisqueira Típica"
+      ]
+    }
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "type": "Debit",
+    "name": "Mastercard 1",
+    "number": 123456,
+    "expirationDate": "2023-06",
+    "cvv": 123
+  },
+  {
+    "type": "Credit",
+    "name": "Mastercard 2",
+    "number": 123456,
+    "expirationDate": "2023-06",
+    "cvv": 123
+  }
+]

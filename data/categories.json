@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Burger",
+    "$$": {
+      "image": "burger.jpg"
+    }
+  },
+  {
+    "name": "Desserts",
+    "$$": {
+      "image": "desserts.jpg"
+    }
+  },
+  {
+    "name": "Donner",
+    "$$": {
+      "image": "donner.jpeg"
+    }
+  },
+  {
+    "name": "Drinks",
+    "$$": {
+      "image": "drinks.jpg"
+    }
+  },
+  {
+    "name": "Ice cream",
+    "$$": {
+      "image": "ice_cream.jpeg"
+    }
+  },
+  {
+    "name": "Japonese",
+    "$$": {
+      "image": "japonese.jpg"
+    }
+  },
+  {
+    "name": "Meals",
+    "$$": {
+      "image": "meals.jpg"
+    }
+  },
+  {
+    "name": "Pizzas",
+    "$$": {
+      "image": "pizzas.jpeg"
+    }
+  },
+  {
+    "name": "Portions",
+    "$$": {
+      "image": "portions.jpg"
+    }
+  },
+  {
+    "name": "Sandwich",
+    "$$": {
+      "image": "sandwich.jpg"
+    }
+  },
+  {
+    "name": "Shawarma",
+    "$$": {
+      "image": "shawarma.jpeg"
+    }
+  },
+  {
+    "name": "Thai Foods",
+    "$$": {
+      "image": "thai_foods.jpeg"
+    }
+  },
+  {
+    "name": "Vegan",
+    "$$": {
+      "image": "vegan.jpeg"
+    }
+  }
+]

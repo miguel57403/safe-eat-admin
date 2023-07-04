@@ -1,0 +1,147 @@
+[
+  {
+    "password": "123",
+    "name": "Cris",
+    "email": "cris@safeeat.com",
+    "cellphone": "999222111",
+    "restrictionIds": [],
+    "$$": {
+      "payments": 1,
+      "photo": "cris.webp",
+      "restrictions": ["Vegan", "Pescatarian"],
+      "addresses": [
+        {
+          "name": "Home",
+          "street": "Oak Street",
+          "number": "123",
+          "complement": "Apartment 4B",
+          "city": "Los Angeles",
+          "postalCode": "90001"
+        },
+        {
+          "name": "HighSchool",
+          "street": "Highland Road",
+          "number": "789",
+          "complement": "Suite 200",
+          "city": "San Francisco",
+          "postalCode": "94101"
+        }
+      ]
+    }
+  },
+  {
+    "password": "123",
+    "name": "Greg",
+    "email": "greg@safeeat.com",
+    "cellphone": "999222111",
+    "restrictionIds": [
+      "Gluten-free",
+      "Lactose-free",
+      "Nut-free",
+      "Soy-free",
+      "Organic",
+      "Sugar-free",
+      "Low-fat",
+      "Allergen-free"
+    ],
+    "$$": {
+      "payments": 2,
+      "photo": "greg.webp",
+      "restrictions": [],
+      "addresses": [
+        {
+          "name": "School",
+          "street": "Main Avenue",
+          "number": "456",
+          "complement": "Avenue House",
+          "city": "New York",
+          "postalCode": "10001"
+        },
+        {
+          "name": "Best Friend",
+          "street": "Park Lane",
+          "number": "101",
+          "complement": "Front of the Park",
+          "city": "London",
+          "postalCode": "SW1A 1AA"
+        }
+      ]
+    }
+  },
+  {
+    "password": "123",
+    "name": "Beatriz",
+    "email": "beatriz@safeeat.com",
+    "cellphone": "888333444",
+    "restrictionIds": ["Mediterranean", "Kosher", "Halal", "Vegetarian"],
+    "$$": {
+      "payments": 2,
+      "photo": "beatriz.webp",
+      "restrictions": [],
+      "addresses": [
+        {
+          "name": "Work",
+          "street": "Rue de la Paix",
+          "number": "15",
+          "complement": "Apartment 2B",
+          "city": "Paris",
+          "postalCode": "75002"
+        },
+        {
+          "name": "Girlfriend",
+          "street": "Hauptstraße",
+          "number": "45",
+          "complement": "House",
+          "city": "Berlin",
+          "postalCode": "10115"
+        },
+        {
+          "name": "Boyfriend",
+          "street": "Amsterdamseweg",
+          "number": "789",
+          "complement": "Unit 3C",
+          "city": "Amsterdam",
+          "postalCode": "1012 AB"
+        }
+      ]
+    }
+  },
+  {
+    "password": "123",
+    "name": "Julius",
+    "email": "julius@safeeat.com",
+    "cellphone": "777444555",
+    "restrictionIds": [],
+    "$$": {
+      "payments": 2,
+      "photo": "julius.webp",
+      "restrictions": ["Sugar-free", "Low-fat", "Allergen-free"],
+      "addresses": [
+        {
+          "name": "Child House",
+          "street": "Rua das Flores",
+          "number": "678",
+          "complement": "House",
+          "city": "São Paulo",
+          "postalCode": "01234-567"
+        },
+        {
+          "name": "Work 1",
+          "street": "Via Roma",
+          "number": "25",
+          "complement": "House",
+          "city": "Rome",
+          "postalCode": "00185"
+        },
+        {
+          "name": "Work 2",
+          "street": "Calle Principal",
+          "number": "123",
+          "complement": "Piso 2",
+          "city": "Madrid",
+          "postalCode": "28001"
+        }
+      ]
+    }
+  }
+]
