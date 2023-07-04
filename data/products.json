@@ -1,0 +1,394 @@
+[
+  {
+    "name": "Francezinha",
+    "price": 10.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Beef steak",
+        "Smoked ham",
+        "Spicy sausage",
+        "Melted cheese",
+        "Tomato sauce",
+        "Beer-infused sauce",
+        "French fries",
+        "Toasted bread slices"
+      ]
+    }
+  },
+  {
+    "name": "Pasta Carbonara",
+    "price": 12.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Pasta",
+        "Bacon",
+        "Eggs",
+        "Parmesan cheese",
+        "Garlic",
+        "Black pepper",
+        "Salt"
+      ],
+      "restaurant": "Cantinho Lusitano"
+    }
+  },
+  {
+    "name": "Margherita Pizza",
+    "price": 8.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Pizza dough",
+        "Tomato sauce",
+        "Mozzarella cheese",
+        "Fresh basil leaves",
+        "Olive oil",
+        "Salt"
+      ]
+    }
+  },
+  {
+    "name": "Caesar Salad",
+    "price": 9.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Salads",
+      "ingredients": [
+        "Romaine lettuce",
+        "Parmesan cheese",
+        "Croutons",
+        "Caesar dressing",
+        "Lemon juice",
+        "Garlic",
+        "Anchovy fillets",
+        "Black pepper",
+        "Salt"
+      ]
+    }
+  },
+  {
+    "name": "Chicken Teriyaki",
+    "price": 11.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Chicken breast",
+        "Teriyaki sauce",
+        "Soy sauce",
+        "Mirin",
+        "Brown sugar",
+        "Garlic",
+        "Ginger",
+        "Green onions",
+        "Sesame seeds"
+      ]
+    }
+  },
+  {
+    "name": "Caprese Salad",
+    "price": 8.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Salads",
+      "ingredients": [
+        "Tomatoes",
+        "Mozzarella cheese",
+        "Fresh basil leaves",
+        "Balsamic vinegar",
+        "Olive oil",
+        "Salt"
+      ]
+    }
+  },
+  {
+    "name": "Beef Burger",
+    "price": 10.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Burger",
+      "ingredients": [
+        "Beef patty",
+        "Burger bun",
+        "Lettuce",
+        "Tomato",
+        "Onion",
+        "Pickles",
+        "Cheese",
+        "Ketchup",
+        "Mustard"
+      ]
+    }
+  },
+  {
+    "name": "Greek Salad",
+    "price": 9.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Salads",
+      "ingredients": [
+        "Cucumber",
+        "Tomatoes",
+        "Red onion",
+        "Kalamata olives",
+        "Feta cheese",
+        "Fresh dill",
+        "Lemon juice",
+        "Olive oil",
+        "Salt",
+        "Black pepper"
+      ]
+    }
+  },
+  {
+    "name": "Fish and Chips",
+    "price": 12.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "White fish fillets",
+        "Potatoes",
+        "Beer batter",
+        "Tartar sauce",
+        "Lemon wedges",
+        "Salt",
+        "Black pepper"
+      ]
+    }
+  },
+  {
+    "name": "Margarita Cocktail",
+    "price": 7.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Drinks",
+      "ingredients": ["Tequila", "Lime juice", "Triple sec", "Salt"]
+    }
+  },
+  {
+    "name": "Chicken Caesar Wrap",
+    "price": 9.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Grilled chicken",
+        "Romaine lettuce",
+        "Parmesan cheese",
+        "Caesar dressing",
+        "Flour tortilla"
+      ]
+    }
+  },
+  {
+    "name": "Pineapple Fried Rice",
+    "price": 10.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Cooked rice",
+        "Pineapple",
+        "Shrimp",
+        "Chicken",
+        "Eggs",
+        "Soy sauce",
+        "Fish sauce",
+        "Curry powder",
+        "Green onions"
+      ]
+    }
+  },
+  {
+    "name": "Spinach and Feta Stuffed Chicken",
+    "price": 11.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Chicken breast",
+        "Spinach",
+        "Feta cheese",
+        "Garlic",
+        "Olive oil",
+        "Salt",
+        "Black pepper"
+      ]
+    }
+  },
+  {
+    "name": "Vegetable Curry",
+    "price": 9.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Coconut milk",
+        "Curry paste",
+        "Onion",
+        "Garlic",
+        "Ginger",
+        "Turmeric",
+        "Cumin",
+        "Coriander",
+        "Rice"
+      ]
+    }
+  },
+  {
+    "name": "Greek Gyro",
+    "price": 8.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Sandwich",
+      "ingredients": [
+        "Pita bread",
+        "Grilled lamb or chicken",
+        "Tzatziki sauce",
+        "Tomatoes",
+        "Onion",
+        "Lettuce"
+      ]
+    }
+  },
+  {
+    "name": "Classic Cheesecake",
+    "price": 6.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Desserts",
+      "ingredients": [
+        "Graham cracker crust",
+        "Cream cheese",
+        "Sugar",
+        "Eggs",
+        "Sour cream",
+        "Vanilla extract"
+      ]
+    }
+  },
+  {
+    "name": "Chicken Noodle Soup",
+    "price": 8.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Soups",
+      "ingredients": [
+        "Chicken broth",
+        "Chicken breast",
+        "Egg noodles",
+        "Carrots",
+        "Celery",
+        "Onion",
+        "Garlic",
+        "Parsley",
+        "Salt",
+        "Black pepper"
+      ]
+    }
+  },
+  {
+    "name": "Shrimp Scampi",
+    "price": 12.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Shrimp",
+        "Garlic",
+        "Butter",
+        "Lemon juice",
+        "White wine",
+        "Parsley",
+        "Salt",
+        "Black pepper"
+      ]
+    }
+  },
+  {
+    "name": "Vegetable Spring Rolls",
+    "price": 7.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Desserts",
+      "ingredients": [
+        "Spring roll wrappers",
+        "Soy sauce",
+        "Sesame oil",
+        "Garlic",
+        "Ginger",
+        "Salt",
+        "Black pepper"
+      ]
+    }
+  },
+  {
+    "name": "Mango Smoothie",
+    "price": 6.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Desserts",
+      "ingredients": ["Mango", "Yogurt", "Milk", "Honey", "Ice cubes"]
+    }
+  },
+  {
+    "name": "Beef Stir-Fry",
+    "price": 11.0,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Meals",
+      "ingredients": [
+        "Beef strips",
+        "Soy sauce",
+        "Oyster sauce",
+        "Garlic",
+        "Ginger",
+        "Cornstarch",
+        "Rice"
+      ]
+    }
+  },
+  {
+    "name": "Tiramisu",
+    "price": 7.5,
+    "categoryId": null,
+    "ingredientIds": [],
+    "$$": {
+      "category": "Desserts",
+      "ingredients": [
+        "Ladyfingers",
+        "Mascarpone cheese",
+        "Eggs",
+        "Sugar",
+        "Coffee",
+        "Cocoa powder"
+      ]
+    }
+  }
+]

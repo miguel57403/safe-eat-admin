@@ -76,5 +76,17 @@
     "$$": {
       "image": "vegan.jpeg"
     }
+  },
+  {
+    "name": "Salads",
+    "$$": {
+      "image": "salads.jpeg"
+    }
+  },
+  {
+    "name": "Soups",
+    "$$": {
+      "image": "soup.jpg"
+    }
   }
 ]

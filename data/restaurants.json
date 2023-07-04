@@ -2,216 +2,256 @@
   {
     "name": "O Tasco",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Deliciosos petiscos portugueses!"
-        }
-      ]
+      "advertisements": ["Deliciosos petiscos portugueses!"],
+      "productSections": {
+        "Favorites": ["Francezinha", "Beef Burger", "Vegetable Curry"],
+        "Others": ["Tiramisu", "Greek Salad"]
+      }
     }
   },
   {
     "name": "A Cozinha Portuguesa",
     "$$": {
       "advertisements": [
-        {
-          "title": "Culinária portuguesa reinventada!"
-        },
-        {
-          "title": "Cozinha portuguesa genuína!"
-        }
-      ]
+        "Culinária portuguesa reinventada!",
+        "Cozinha portuguesa genuína!"
+      ],
+      "productSections": {
+        "Favorites": ["Margarita Cocktail"],
+        "Promotional": ["Vegetable Spring Rolls"],
+        "Popular": ["Fish and Chips", "Chicken Teriyaki"]
+      }
     }
   },
   {
     "name": "Cantinho Lusitano",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Tradição e sabor autênticos!"
-        }
-      ]
+      "advertisements": ["Tradição e sabor autênticos!"],
+      "productSections": {
+        "Favorites": ["Shrimp Scampi", "Vegetable Spring Rolls"],
+        "Others": ["Mango Smoothie", "Beef Stir-Fry", "Tiramisu"]
+      }
     }
   },
   {
     "name": "Adega da Vila",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Descubra Portugal à mesa!"
-        }
-      ]
+      "advertisements": ["Descubra Portugal à mesa!"],
+      "productSections": {
+        "Favorites": ["Spinach and Feta Stuffed Chicken"],
+        "Popular": [
+          "Vegetable Curry",
+          "Greek Gyro",
+          "Classic Cheesecake",
+          "Chicken Noodle Soup"
+        ]
+      }
     }
   },
   {
     "name": "Sabores de Portugal",
     "$$": {
       "advertisements": [
-        {
-          "title": "Experiência enológica inesquecível!"
-        },
-        {
-          "title": "Pratos típicos com criatividade!"
-        }
-      ]
+        "Experiência enológica inesquecível!",
+        "Pratos típicos com criatividade!"
+      ],
+      "productSections": {
+        "Favorites": ["Greek Salad", "Fish and Chips", "Margarita Cocktail"],
+        "Others": ["Chicken Caesar Wrap", "Pineapple Fried Rice"]
+      }
     }
   },
   {
     "name": "O Fado",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Uma viagem pelo vinho!"
-        }
-      ]
+      "advertisements": ["Uma viagem pelo vinho!"],
+      "productSections": {
+        "Popular": ["Caesar Salad", "Chicken Teriyaki"],
+        "Others": ["Caprese Salad", "Beef Burger"]
+      }
     }
   },
   {
     "name": "Tasca do Zé",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Adega tradicional, vinhos excepcionais!"
-        }
-      ]
+      "advertisements": ["Adega tradicional, vinhos excepcionais!"],
+      "productSections": {
+        "Popular": [
+          "Francezinha",
+          "Pasta Carbonara",
+          "Margherita Pizza",
+          "Shrimp Scampi"
+        ]
+      }
     }
   },
   {
     "name": "Marisqueira Típica",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Sabores portugueses inigualáveis!"
-        }
-      ]
+      "advertisements": ["Sabores portugueses inigualáveis!"],
+      "productSections": {
+        "Favorites": ["Caesar Salad", "Tiramisu", "Caprese Salad"],
+        "Others": ["Greek Salad", "Margherita Pizza"]
+      }
     }
   },
   {
     "name": "Aromas de Portugal",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Sabor tradicional com inovação!"
-        }
-      ]
+      "advertisements": ["Sabor tradicional com inovação!"],
+      "productSections": {
+        "Favorites": ["Shrimp Scampi", "Chicken Caesar Wrap", "Beef Stir-Fry"],
+        "Others": [
+          "Vegetable Spring Rolls",
+          "Spinach and Feta Stuffed Chicken",
+          "Greek Gyro"
+        ]
+      }
     }
   },
   {
     "name": "Taberna Portuguesa",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Tradição em cada garfada!"
-        }
-      ]
+      "advertisements": ["Tradição em cada garfada!"],
+      "productSections": {
+        "Favorites": [
+          "Spinach and Feta Stuffed Chicken",
+          "Beef Stir-Fry",
+          "Vegetable Spring Rolls",
+          "Greek Gyro"
+        ],
+        "Popular": ["Chicken Caesar Wrap"]
+      }
     }
   },
   {
     "name": "Casa Portuguesa",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Uma viagem gastronômica autêntica!"
-        }
-      ]
+      "advertisements": ["Uma viagem gastronômica autêntica!"],
+      "productSections": {
+        "Popular": ["Pasta Carbonara", "Fish and Chips"],
+        "Favorites": ["Chicken Noodle Soup", "Mango Smoothie"]
+      }
     }
   },
   {
     "name": "Petiscos e Vinhos",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Ambiente acolhedor e familiar!"
-        }
-      ]
+      "advertisements": ["Ambiente acolhedor e familiar!"],
+      "productSections": {
+        "Favorites": ["Caprese Salad", "Caesar Salad"],
+        "Others": [
+          "Margarita Cocktail",
+          "Francezinha",
+          "Spinach and Feta Stuffed Chicken"
+        ]
+      }
     }
   },
   {
     "name": "Tasca da Esquina",
     "$$": {
       "advertisements": [
-        {
-          "title": "Sabores genuínos de Portugal!"
-        },
-        {
-          "title": "Aromas e sabores da adega!"
-        }
-      ]
+        "Sabores genuínos de Portugal!",
+        "Aromas e sabores da adega!"
+      ],
+      "productSections": {
+        "Favorites": ["Greek Salad", "Greek Gyro", "Chicken Noodle Soup"],
+        "Others": ["Pasta Carbonara", "Chicken Caesar Wrap"]
+      }
     }
   },
   {
     "name": "O Marisqueiro",
     "$$": {
       "advertisements": [
-        {
-          "title": "Vinhos portugueses de qualidade!"
-        },
-        {
-          "title": "Experiência gastronômica única!"
-        }
-      ]
+        "Vinhos portugueses de qualidade!",
+        "Experiência gastronômica única!"
+      ],
+      "productSections": {
+        "Popular": [
+          "Fish and Chips",
+          "Tiramisu",
+          "Chicken Teriyaki",
+          "Beef Burger",
+          "Pineapple Fried Rice"
+        ]
+      }
     }
   },
   {
     "name": "Tradições Lusas",
     "$$": {
       "advertisements": [
-        {
-          "title": "Pequeno espaço, grande sabor!"
-        },
-        {
-          "title": "Sabor lusitano autêntico!"
-        }
-      ]
+        "Pequeno espaço, grande sabor!",
+        "Sabor lusitano autêntico!"
+      ],
+      "productSections": {
+        "Popular": [
+          "Vegetable Spring Rolls",
+          "Margarita Cocktail",
+          "Beef Burger"
+        ],
+        "Others": ["Beef Stir-Fry", "Pasta Carbonara"]
+      }
     }
   },
   {
     "name": "Taverna do Bacalhau",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Experiência culinária lusitana única!"
-        }
-      ]
+      "advertisements": ["Experiência culinária lusitana única!"],
+      "productSections": {
+        "Favorites": ["Classic Cheesecake", "Spinach and Feta Stuffed Chicken"],
+        "Popular": ["Margherita Pizza", "Chicken Caesar Wrap"]
+      }
     }
   },
   {
     "name": "Sabores do Douro",
     "$$": {
-      "advertisements": [
-        {
-          "title": "A arte de cozinhar portuguesa!"
-        }
-      ]
+      "advertisements": ["A arte de cozinhar portuguesa!"],
+      "productSections": {
+        "Favorites": ["Pineapple Fried Rice", "Chicken Teriyaki", "Greek Gyro"],
+        "Others": ["Vegetable Curry"]
+      }
     }
   },
   {
     "name": "O Refúgio",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Comida caseira imperdível!"
-        }
-      ]
+      "advertisements": ["Comida caseira imperdível!"],
+      "productSections": {
+        "Favorites": ["Greek Gyro", "Beef Burger"],
+        "Others": ["Chicken Teriyaki", "Vegetable Curry", "Margarita Cocktail"]
+      }
     }
   },
   {
     "name": "Sabor Português",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Culinária que aquece a alma!"
-        }
-      ]
+      "advertisements": ["Culinária que aquece a alma!"],
+      "productSections": {
+        "Popular": [
+          "Chicken Noodle Soup",
+          "Beef Stir-Fry",
+          "Chicken Caesar Wrap"
+        ],
+        "Others": ["Fish and Chips", "Caesar Salad", "Greek Gyro"]
+      }
     }
   },
   {
     "name": "Maré de Sabores",
     "$$": {
-      "advertisements": [
-        {
-          "title": "Delícias típicas de Portugal!"
-        }
-      ]
+      "advertisements": ["Delícias típicas de Portugal!"],
+      "productSections": {
+        "Promotional": [
+          "Margherita Pizza",
+          "Vegetable Spring Rolls",
+          "Caprese Salad"
+        ],
+        "Others": ["Francezinha", "Pasta Carbonara"]
+      }
     }
   }
 ]

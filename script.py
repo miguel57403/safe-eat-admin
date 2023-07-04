@@ -1,9 +1,11 @@
-from typing import Any
+from typing import Any, List
 import requests
 import json
+import random
 
 # BASE_URL = "https://safe-eat-api.azurewebsites.net"
 BASE_URL = "http://localhost:8080"
+SAVE_IMAGES = False
 
 
 def load_json(path):
@@ -19,6 +21,31 @@ class Mock:
     categories = load_json('./data/categories.json')
     restaurants_sections = load_json('./data/restaurants_sections.json')
     deliveries = load_json('./data/deliveries.json')
+    products = load_json('./data/products.json')
+    ingredients = load_json('./data/ingredients.json')
+    ingredients_restrictions = load_json(
+        "./data/ingredients_restrictions.json")
+
+    @staticmethod
+    def find_product(*, name):
+        for product in Mock.products:
+            if product['name'] == name:
+                return dict(product)
+        raise Exception(f"Product with name {name} not found")
+
+    @staticmethod
+    def find_category(*, name):
+        for category in Mock.categories:
+            if category['name'] == name:
+                return dict(category)
+        raise Exception(f"Category with name {name} not found")
+
+    @staticmethod
+    def find_ingredient(*, name):
+        for ingredient in Mock.ingredients:
+            if ingredient['name'] == name:
+                return dict(ingredient)
+        raise Exception(f"Ingredient with name {name} not found")
 
 
 class Context:
@@ -32,10 +59,32 @@ class Context:
         self.entities[key] = self.entities.get(key, []) + values
 
     def get_id(self, key, predicate):
-        for it in self.entities.get(key, []):
+        result = self.get_id_unsafe(key, predicate)
+        if result is None:
+            raise Exception(f"Entity with predicate not found")
+        return result
+
+    def get_id_unsafe(self, key, predicate):
+        for it in self.entities[key]:
             if predicate(it):
                 return it['id']
-        raise Exception(f"Entity with predicate {predicate} not found")
+
+    def get_id_by_name(self, key, name):
+        for it in self.entities[key]:
+            if it['name'] == name:
+                return it['id']
+        raise Exception(f"Entity in '{key}' with name '{name}' not found")
+
+    def get_id_by_dict(self, key, data):
+        result = self.get_id_by_dict_unsafe(key, data)
+        if result is None:
+            raise Exception(f"Entity in '{key}' with data '{data}' not found")
+        return result
+
+    def get_id_by_dict_unsafe(self, key, data):
+        for it in self.entities[key]:
+            if all(it[k] == data[k] for k in data.keys()):
+                return it['id']
 
 
 class Call:
@@ -92,7 +141,14 @@ class MockerAdmin:
             "cellphone": "999222111",
             "restrictionIds": [],
         }
-        self.send_images = False
+        self.executions = []
+
+    def _check_dependencies(self, current, dependencies):
+        if all(it in self.executions for it in dependencies):
+            self.executions.append(current)
+            return True
+        raise Exception(
+            f"MockerAdmin: '{current}' depends on {dependencies}, but {self.executions} were executed")
 
     def _signup(self):
         self.call.post(f"{BASE_URL}/signup", json=self.admin).json()
@@ -105,6 +161,7 @@ class MockerAdmin:
         self.call.add_header("Authorization", f"Bearer {token}")
 
     def _add_restrictions(self):
+        self._check_dependencies("restrictions", [])
         self.call.debug = False
         for restriction in Mock.restrictions:
             response = self.call.post(f"{BASE_URL}/restrictions",
@@ -116,7 +173,7 @@ class MockerAdmin:
         self.call.debug = True
 
     def _update_category_image(self, category, extras):
-        if not self.send_images:
+        if not SAVE_IMAGES:
             return
         files = {"image": open("./images/categories/" +
                                extras.get("image"), "rb")}
@@ -128,7 +185,7 @@ class MockerAdmin:
         self.call.debug = False
         for advertisement in extras.get("advertisements", []):
             self.call.post(f"{BASE_URL}/advertisements", json={
-                "title": advertisement["title"],
+                "title": advertisement,
                 "restaurantId": restaurant_id,
             }, headers=self.call.headers)
             # TODO: Add image
@@ -151,18 +208,22 @@ class MockerAdmin:
         print()
 
     def _add_restaurants(self):
+        self._check_dependencies("restaurants", [])
         for restaurant in Mock.restaurants:
-            self.call.debug = False
+            restaurant = dict(restaurant)
             extras = restaurant["$$"]
             del restaurant["$$"]
 
+            self.call.debug = False
             response = self.call.post(f"{BASE_URL}/restaurants",
                                       json=restaurant, headers=self.call.headers)
-            restaurant = response.json()
-            print("Restaurant: ", restaurant["name"])
-            self.ctx.add("restaurants", restaurant)
-            self._add_advertisements(restaurant, extras)
-            self._add_deliveries(restaurant, extras)
+            try:
+                response = response.json()
+                print("Restaurant: ", response["name"])
+                self._add_advertisements(response, extras)
+                self._add_deliveries(response, extras)
+            except:
+                print("Restaurant already exists: ", restaurant["name"])
 
         self.call.debug = False
         response = self.call.get(
@@ -172,7 +233,8 @@ class MockerAdmin:
         print()
         self.call.debug = True
 
-    def _add_restaurants_sections(self):
+    def _add_restaurants_sections(self, *, depends=[]):
+        self._check_dependencies("restaurants_sections", depends)
         self.call.debug = False
         for section in Mock.restaurants_sections:
             extras = section["$$"]
@@ -190,7 +252,9 @@ class MockerAdmin:
         self.call.debug = True
 
     def _add_categories(self):
+        self._check_dependencies("categories", [])
         for category in Mock.categories:
+            category = dict(category)
             self.call.debug = False
             extras = category["$$"]
             del category["$$"]
@@ -207,20 +271,131 @@ class MockerAdmin:
         print()
         self.call.debug = True
 
+    def _add_ingredients(self, *, depends=[]):
+        self._check_dependencies("ingredients", depends)
+        # Collect all ingredients
+        all_ingredients = []
+        for restaurant in Mock.restaurants:
+            restaurant = dict(restaurant)
+            restaurantId = self.ctx.get_id_by_name(
+                "restaurants", restaurant["name"])
+
+            products_names = []
+            for products in restaurant["$$"]['productSections'].values():
+                products_names.extend(products)
+            products_names = set(products_names)
+
+            ingredients_names = []
+            for product in products_names:
+                product = Mock.find_product(name=product)
+                ingredients_names.extend(product["$$"]["ingredients"])
+            ingredients_names = set(ingredients_names)
+
+            for ingredient in ingredients_names:
+                ingredient = Mock.find_ingredient(name=ingredient)
+                ingredient["description"] = ingredient["name"]
+                restrictions = Mock.ingredients_restrictions[ingredient['name']]
+                restriction_ids = [self.ctx.get_id_by_name("restrictions", restriction)
+                                   for restriction in restrictions]
+                ingredient["restrictionIds"] = restriction_ids
+                ingredient["$$"] = {"restaurantId": restaurantId}
+                all_ingredients.append(ingredient)
+
+        # Add ingredients
+        self.call.debug = False
+        for ingredient in all_ingredients:
+            extras = ingredient["$$"]
+            del ingredient["$$"]
+            restaurantId = extras["restaurantId"]
+            self.call.post(f"{BASE_URL}/ingredients/restaurant/{restaurantId}",
+                           json=ingredient, headers=self.call.headers)
+        response = self.call.get(f"{BASE_URL}/ingredients",
+                                 headers=self.call.headers)
+        self.ctx.add_all("ingredients", response.json())
+        print("Ingredients Count: ", len(response.json()))
+        print()
+        self.call.debug = True
+
+    def _add_products(self, *, depends=[]):
+        self._check_dependencies("products", depends)
+
+        # Collect all products
+        all_products = []
+        for restaurant in Mock.restaurants:
+            restaurant = dict(restaurant)
+            restaurantId = self.ctx.get_id_by_name(
+                "restaurants", restaurant["name"])
+
+            products_names = []
+            for products in restaurant["$$"]['productSections'].values():
+                products_names.extend(products)
+            products_names = set(products_names)
+
+            for product in products_names:
+                product = Mock.find_product(name=product)
+                extras = product["$$"]
+                del product["$$"]
+                product['price'] = random.random() * 100
+                product['categoryId'] = self.ctx.get_id_by_name(
+                    "categories", extras['category'])
+                product['ingredientIds'] = [
+                    self.ctx.get_id_by_dict(
+                        "ingredients", {"name": ingredient, "restaurantId": restaurantId})
+                    for ingredient in extras.get("ingredients", [])]
+                product["$$"] = {"restaurantId": restaurantId}
+                all_products.append(product)
+
+        # Add products
+        self.call.debug = False
+        for product in all_products:
+            extras = product["$$"]
+            del product["$$"]
+            restaurantId = extras["restaurantId"]
+            self.call.post(f"{BASE_URL}/products/restaurant/{restaurantId}",
+                           json=product, headers=self.call.headers)
+        response = self.call.get(f"{BASE_URL}/products",
+                                 headers=self.call.headers)
+        self.ctx.add_all("products", response.json())
+        print("Products Count: ", len(response.json()))
+        print()
+
+    def _add_product_sections(self, *, depends=[]):
+        self._check_dependencies("product_sections", depends)
+        self.call.debug = False
+        for restaurant in Mock.restaurants:
+            restaurant = dict(restaurant)
+            for section, products in restaurant["$$"]["productSections"].items():
+                restaurantId = self.ctx.get_id_by_name(
+                    'restaurants', restaurant['name'])
+                product_ids = [
+                    self.ctx.get_id_by_dict(
+                        'products', {"name": product, "restaurantId": restaurantId})
+                    for product in products]
+                data = {"name": section, "productIds": product_ids}
+                self.call.post(f"{BASE_URL}/productSections/restaurant/{restaurantId}",
+                               json=data, headers=self.call.headers)
+        response = self.call.get(
+            f"{BASE_URL}/productSections", headers=self.call.headers)
+        self.ctx.add_all("product_sections", response.json())
+        print("Product Sections Count: ", len(response.json()))
+        print()
+
     def execute(self):
         self._signup()
         self._login()
         self._add_restrictions()
         self._add_restaurants()
-        self._add_restaurants_sections()
+        self._add_restaurants_sections(depends=["restaurants"])
         self._add_categories()
+        self._add_ingredients(depends=["restrictions", "restaurants"])
+        self._add_products(depends=["categories", "ingredients"])
+        self._add_product_sections(depends=["products"])
 
 
 class MockerUser:
     def __init__(self, ctx: Context) -> None:
         self.ctx = ctx
         self.call = Call()
-        self.send_images = False
 
     def _signup(self, user: dict, extras: dict):
         restrictions_ids = [self.ctx.get_id("restrictions", lambda it: it['name'] == name)
@@ -238,7 +413,7 @@ class MockerUser:
         print()
 
     def _upload_image(self, user: dict, extras: dict):
-        if not self.send_images:
+        if not SAVE_IMAGES:
             return
         files = {"image": open("./images/users/" + extras.get("photo"), "rb")}
         self.call.put(f"{BASE_URL}/users/me/image",

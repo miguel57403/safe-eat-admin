@@ -1,82 +1,38 @@
 [
   {
-    "name": "Vegan",
-    "description": "Diet excluding meat, varying in inclusion of other animal products."
-  },
-  {
-    "name": "Gluten-free",
-    "description": "Diet excluding gluten, a mixture of proteins found in wheat and related grains."
-  },
-  {
-    "name": "Lactose-free",
-    "description": "Diet excluding lactose, the sugar found in milk and dairy products."
-  },
-  {
-    "name": "Paleo",
-    "description": "Diet based on foods presumed to have been available to Paleolithic humans."
+    "name": "Halal",
+    "description": "Diet adhering to Islamic dietary laws and regulations."
   },
   {
     "name": "Kosher",
     "description": "Diet adhering to Jewish dietary laws and regulations."
   },
   {
-    "name": "Halal",
-    "description": "Diet adhering to Islamic dietary laws and regulations."
-  },
-  {
-    "name": "Pescatarian",
-    "description": "Diet that includes fish and other seafood but excludes meat."
-  },
-  {
-    "name": "Nut-free",
-    "description": "Diet excluding nuts and their derivatives."
-  },
-  {
-    "name": "Soy-free",
-    "description": "Diet excluding soy and soy-based products."
-  },
-  {
-    "name": "Raw food",
-    "description": "Diet consisting of uncooked and unprocessed food."
-  },
-  {
-    "name": "Low-carb",
-    "description": "Diet low in carbohydrates and high in protein and fat."
-  },
-  {
-    "name": "Vegetarian",
-    "description": "Diet excluding meat but may include other animal products."
-  },
-  {
-    "name": "Organic",
-    "description": "Diet consisting of foods produced without synthetic fertilizers or pesticides."
-  },
-  {
-    "name": "Sugar-free",
-    "description": "Diet excluding added sugars and sweeteners."
-  },
-  {
-    "name": "Low-sodium",
+    "name": "Hypertension",
     "description": "Diet low in sodium and high in other nutrients."
   },
   {
-    "name": "Mediterranean",
-    "description": "Diet based on traditional eating habits of Mediterranean countries."
+    "name": "Diabetes",
+    "description": "Diet low in carbohydrates and high in protein and fat."
   },
   {
-    "name": "Low-fat",
-    "description": "Diet low in fat and high in other nutrients."
+    "name": "Gluten Intolerance",
+    "description": "Diet excluding gluten, a mixture of proteins found in wheat and related grains."
   },
   {
-    "name": "Flexitarian",
-    "description": "Diet that is primarily vegetarian but occasionally includes meat."
+    "name": "Seafood Allergy",
+    "description": "Diet that exclude fish and other seafood but includes meat."
   },
   {
-    "name": "Allergen-free",
-    "description": "Diet excluding common food allergens such as peanuts, eggs, and shellfish."
+    "name": "Lactose Intolerance",
+    "description": "Diet excluding lactose, the sugar found in milk and dairy products."
   },
   {
-    "name": "High-fiber",
-    "description": "Diet high in dietary fiber, promoting digestive health."
+    "name": "Veganism",
+    "description": "Diet excluding meat, varying in inclusion of other animal products."
+  },
+  {
+    "name": "Vegetarianism",
+    "description": "Diet excluding meat but may include other animal products."
   }
 ]

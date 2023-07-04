@@ -8,7 +8,7 @@
     "$$": {
       "payments": 1,
       "photo": "cris.webp",
-      "restrictions": ["Vegan", "Pescatarian"],
+      "restrictions": ["Veganism", "Seafood Allergy"],
       "addresses": [
         {
           "name": "Home",
@@ -35,14 +35,11 @@
     "email": "greg@safeeat.com",
     "cellphone": "999222111",
     "restrictionIds": [
-      "Gluten-free",
-      "Lactose-free",
-      "Nut-free",
-      "Soy-free",
-      "Organic",
-      "Sugar-free",
-      "Low-fat",
-      "Allergen-free"
+      "Gluten Intolerance",
+      "Lactose Intolerance",
+      "Veganism",
+      "Diabetes",
+      "Hypertension"
     ],
     "$$": {
       "payments": 2,
@@ -73,7 +70,7 @@
     "name": "Beatriz",
     "email": "beatriz@safeeat.com",
     "cellphone": "888333444",
-    "restrictionIds": ["Mediterranean", "Kosher", "Halal", "Vegetarian"],
+    "restrictionIds": ["Kosher", "Halal", "Vegetarianism"],
     "$$": {
       "payments": 2,
       "photo": "beatriz.webp",
@@ -115,7 +112,7 @@
     "$$": {
       "payments": 2,
       "photo": "julius.webp",
-      "restrictions": ["Sugar-free", "Low-fat", "Allergen-free"],
+      "restrictions": ["Diabetes", "Hypertension"],
       "addresses": [
         {
           "name": "Child House",
