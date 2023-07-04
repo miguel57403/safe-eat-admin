@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Takeoff",
+    "price": 0.0,
+    "minimumTime": "10 min.",
+    "maximumTime": "20 min."
+  },
+  {
+    "name": "Economy",
+    "price": 0.99,
+    "minimumTime": "40 min.",
+    "maximumTime": "60 min."
+  },
+  {
+    "name": "Express",
+    "price": 1.99,
+    "minimumTime": "20 min.",
+    "maximumTime": "40 min."
+  }
+]

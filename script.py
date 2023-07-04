@@ -18,6 +18,7 @@ class Mock:
     restaurants = load_json('./data/restaurants.json')
     categories = load_json('./data/categories.json')
     restaurants_sections = load_json('./data/restaurants_sections.json')
+    deliveries = load_json('./data/deliveries.json')
 
 
 class Context:
@@ -130,9 +131,22 @@ class MockerAdmin:
                 "title": advertisement["title"],
                 "restaurantId": restaurant_id,
             }, headers=self.call.headers)
+            # TODO: Add image
         response = self.call.get(
             f"{BASE_URL}/advertisements/restaurant/{restaurant_id}", headers=self.call.headers)
         print("Advertisements Count: ", len(response.json()))
+        self.call.debug = True
+        print()
+
+    def _add_deliveries(self, restaurant, extras):
+        restaurantId = restaurant["id"]
+        self.call.debug = False
+        for delivery in Mock.deliveries:
+            self.call.post(f"{BASE_URL}/deliveries/restaurant/{restaurantId}",
+                           json=delivery, headers=self.call.headers)
+        response = self.call.get(f"{BASE_URL}/deliveries/restaurant/{restaurantId}",
+                                 headers=self.call.headers)
+        print("Deliveries Count: ", len(response.json()))
         self.call.debug = True
         print()
 
@@ -148,7 +162,7 @@ class MockerAdmin:
             print("Restaurant: ", restaurant["name"])
             self.ctx.add("restaurants", restaurant)
             self._add_advertisements(restaurant, extras)
-            self.call.debug = True
+            self._add_deliveries(restaurant, extras)
 
         self.call.debug = False
         response = self.call.get(
@@ -161,7 +175,6 @@ class MockerAdmin:
     def _add_restaurants_sections(self):
         self.call.debug = False
         for section in Mock.restaurants_sections:
-            self.call.debug = False
             extras = section["$$"]
             del section["$$"]
             restaurant_ids = [self.ctx.get_id('restaurants', lambda it: it['name'] == name)
@@ -170,8 +183,10 @@ class MockerAdmin:
             response = self.call.post(f"{BASE_URL}/restaurantSections",
                                       json=section, headers=self.call.headers)
             section = response.json()
-            print("Section: ", section["name"])
-            self.call.debug = True
+        response = self.call.get(f"{BASE_URL}/restaurantSections",
+                                 headers=self.call.headers)
+        print("Restaurant Sections Count: ", len(response.json()))
+        print()
         self.call.debug = True
 
     def _add_categories(self):
@@ -183,13 +198,12 @@ class MockerAdmin:
                                       json=category, headers=self.call.headers)
             category = response.json()
             self._update_category_image(category, extras)
-            self.call.debug = True
 
         self.call.debug = False
         response = self.call.get(
             f"{BASE_URL}/categories", headers=self.call.headers)
         self.ctx.add_all("categories", response.json())
-        print("categories Count: ", len(response.json()))
+        print("Categories Count: ", len(response.json()))
         print()
         self.call.debug = True
 
@@ -272,3 +286,5 @@ admin.execute()
 for it in Mock.users:
     user = MockerUser(ctx)
     user.execute(it)
+
+print(f"Done using {Call.count} requests")
