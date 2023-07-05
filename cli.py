@@ -2,9 +2,10 @@ from commands.database_feed import database_feed
 from commands.database_clear import database_clear
 from commands.database_count import database_count
 
-MONGO_URL = "mongodb://localhost:27017"
-# BASE_URL = "https://safe-eat-api.azurewebsites.net"
-BASE_URL = "http://localhost:8080"
+# MONGO_URL = "mongodb+srv://a57403:UmCcYuRPzdDG7QDK@safeeat.xbbss2l.mongodb.net/safeeatdb?retryWrites=true&w=majority" # atlas
+MONGO_URL = "mongodb://localhost:27017"  # local
+# BASE_URL = "https://safe-eat-api.azurewebsites.net" # azure
+BASE_URL = "http://localhost:8080"  # local
 SAVE_IMAGES = False
 
 
