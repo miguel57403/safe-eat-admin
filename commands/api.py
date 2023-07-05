@@ -10,13 +10,13 @@ class HttpClient:
         self.debug = debug
 
     def _log_start(self, method, url, *, force=False):
-        if True or self.debug and force:
+        if self.debug and force:
             print(f'API: [{HttpClient.count}] {method} {url}')
 
     def _log_end(self, method, url, response):
-        if self.debug and False:
+        if self.debug:
             print(
-                f'API: [{HttpClient.count}] {method} {url} End: ', response.json())
+                f'API: [{HttpClient.count}] {method} {url} {response.status_code}')
 
     def add_header(self, key, value):
         self.headers[key] = value
@@ -46,7 +46,7 @@ class HttpClient:
 
 class Api:
     @staticmethod
-    def create(*, base_url, debug=True):
+    def create(*, base_url, debug=True) -> 'Api':
         return Api(HttpClient(base_url=base_url, debug=debug))
 
     @staticmethod
@@ -87,6 +87,9 @@ class Api:
 
     def advertisements_store(self, data: dict):
         return self.client.post(f"{self.base_url}/advertisements", json=data, headers=self.client.headers)
+
+    def advertisements_update_image(self, id, image):
+        return self.client.put(f"{self.base_url}/advertisements/{id}/image", files={"image": image}, headers=self.client.headers)
 
     # categories
     def categories_index(self):
@@ -139,6 +142,12 @@ class Api:
 
     def restaurants_store(self, data: dict):
         return self.client.post(f"{self.base_url}/restaurants", json=data, headers=self.client.headers)
+
+    def restaurants_update_logo(self, restaurant_id: str, image):
+        return self.client.put(f"{self.base_url}/restaurants/{restaurant_id}/logo", files={"image": image}, headers=self.client.headers)
+
+    def restaurants_update_cover(self, restaurant_id: str, image):
+        return self.client.put(f"{self.base_url}/restaurants/{restaurant_id}/cover", files={"image": image}, headers=self.client.headers)
 
     # restaurantSections
     def restaurant_sections_index(self):
